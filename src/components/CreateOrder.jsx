@@ -1,9 +1,9 @@
-import AddButton from "../SVG/AddButton";
-import ChickenNugget from "../SVG/ChickenNugget";
-import Hamburger from "../SVG/Hamburger";
-import Pizza from "../SVG/Pizza";
-import RemoveButton from "../SVG/RemoveButton";
-import Sandwich from "../SVG/Sandwich";
+import AddButton from "./SVG/AddButton";
+import ChickenNugget from "./SVG/ChickenNugget";
+import Hamburger from "./SVG/Hamburger";
+import Pizza from "./SVG/Pizza";
+import RemoveButton from "./SVG/RemoveButton";
+import Sandwich from "./SVG/Sandwich";
 
 export default function CreateOrder() {
   return (

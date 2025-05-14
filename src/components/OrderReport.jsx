@@ -1,4 +1,4 @@
-import FilterButton from "../SVG/FilterButton";
+import SearchButton from "./SVG/SearchButton";
 
 export default function OrderReport() {
   return (
@@ -7,7 +7,7 @@ export default function OrderReport() {
         <h2 className="text-xl font-bold mb-4">Order Reports</h2>
 
         <div className="flex gap-4 items-center">
-          <FilterButton />
+          <SearchButton />
           <select className=" bg-zinc-900 accent-orange-600 border-none outline-none rounded-sm">
             <option>All</option>
             <option>Pending</option>

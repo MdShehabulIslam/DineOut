@@ -1,7 +1,7 @@
-import CreateOrder from "./components/CreateOrder/CreateOrder";
-import Navbar from "./components/Navbar/Navbar";
-import OrderReport from "./components/OrderReport/OrderReport";
-import OrderSummary from "./components/OrderSummary/OrderSummary";
+import CreateOrder from "./components/CreateOrder";
+import Navbar from "./components/Navbar";
+import OrderReport from "./components/OrderReport";
+import OrderSummary from "./components/OrderSummary";
 
 export default function App() {
   return (
