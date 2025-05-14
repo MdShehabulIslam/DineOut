@@ -1,11 +1,13 @@
-# LWS - Dine Out
+# 💻 LWS - Dine Out 🔥
 
 ## Mohammad Shehabul Islam
 
-### :rocket: Deployment
+### 🚀 Deployment
 
-[Vercel Live link](https://lws-siam-islam-a2.vercel.app/)
+🌐 [Vercel Live link](https://lws-siam-islam-a2.vercel.app/)
 
-### :hammer: Development
+### 👉 Development
 
-[GoogleClass GitHub link](https://github.com/Learn-with-Sumit/batch-3-assignment-2-dine-out-MdShehabulIslam)
+➡️ [GoogleClass GitHub link](https://github.com/Learn-with-Sumit/batch-3-assignment-2-dine-out-MdShehabulIslam)
+
+
