@@ -4,6 +4,10 @@ import SearchButton from "./SVG/SearchButton";
 export default function OrderReport({ orders, onSearch, onDelete, onDeliver }) {
   const [option, setOption] = useState("");
 
+  function handleClick() {
+    onSearch(option);
+  }
+
   return (
     <div>
       <div className="flex justify-between">
@@ -15,8 +19,9 @@ export default function OrderReport({ orders, onSearch, onDelete, onDeliver }) {
             value={option}
             onChange={(e) => {
               setOption(e.target.value);
-              onSearch(e.target.value);
+              // onSearch(e.target.value);
             }}
+            onClick={handleClick}
           >
             <option value="All">All</option>
             <option value="Pending">Pending</option>

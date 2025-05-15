@@ -1,11 +1,17 @@
+import { useState } from "react";
 import AddButton from "./SVG/AddButton";
 import ChickenNugget from "./SVG/ChickenNugget";
 import Hamburger from "./SVG/Hamburger";
 import Pizza from "./SVG/Pizza";
-import RemoveButton from "./SVG/RemoveButton";
 import Sandwich from "./SVG/Sandwich";
 
-export default function CreateOrder() {
+export default function CreateOrder({ onNameChange }) {
+  const [inputName, setInputName] = useState("");
+
+  function handleClick() {
+    onNameChange(inputName);
+  }
+
   return (
     <div className="bg-cardbg rounded-lg p-6 h-[calc(100vh_-_130px)]">
       <h2 className="text-xl font-bold mb-1">CREATE ORDER</h2>
@@ -19,6 +25,8 @@ export default function CreateOrder() {
         <input
           type="text"
           className="w-full bg-gray-700 bg-opacity-50 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-300"
+          value={inputName}
+          onChange={(e) => setInputName(e.target.value)}
         />
       </div>
 
@@ -66,7 +74,7 @@ export default function CreateOrder() {
               </div>
             </div>
             <button className="w-8 h-8 bg-gray-800 hover:bg-primary rounded-full flex items-center justify-center transition-colors duration-300">
-              <RemoveButton />
+              <AddButton />
             </button>
           </div>
 
@@ -87,7 +95,10 @@ export default function CreateOrder() {
         </div>
       </div>
 
-      <button className="w-full bg-primary hover:bg-opacity-90 text-white font-medium py-3 rounded-full transition-all duration-300 hover:shadow-lg transform hover:-translate-y-1">
+      <button
+        className="w-full bg-primary hover:bg-opacity-90 text-white font-medium py-3 rounded-full transition-all duration-300 hover:shadow-lg transform hover:-translate-y-1"
+        onClick={handleClick}
+      >
         Place Order (BDT 100)
       </button>
     </div>

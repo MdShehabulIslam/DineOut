@@ -39,8 +39,8 @@ body {
   overflow: hidden;
 }
 
-select {
-  /* appearance: none; */
+/* select {
+  appearance: none;
   accent-color: #ff602c;
   background-color: #1d1d1d;
   min-width: 100px;
@@ -48,7 +48,7 @@ select {
   outline: none;
   border-radius: 10px;
   padding: 4px;
-}
+} */
 
 .items-container {
   max-height: 250px;

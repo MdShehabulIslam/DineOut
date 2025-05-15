@@ -21,6 +21,34 @@ export default function OrderBoard() {
       amount: 2300,
       status: true,
     },
+    {
+      id: 3,
+      name: "Ishika",
+      itemCount: 3,
+      amount: 2300,
+      status: true,
+    },
+    {
+      id: 4,
+      name: "Shohana",
+      itemCount: 2,
+      amount: 2300,
+      status: false,
+    },
+    {
+      id: 5,
+      name: "S M Nur Islam",
+      itemCount: 9,
+      amount: 2300,
+      status: true,
+    },
+    {
+      id: 6,
+      name: "Sadekool",
+      itemCount: 1,
+      amount: 200,
+      status: false,
+    },
   ];
 
   const [orders, setOrders] = useState(defaultOrder);
@@ -59,9 +87,11 @@ export default function OrderBoard() {
     setFilteredOrders(ordersAfterDeliver);
   }
 
+  function handleNameChange(inputName) {}
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6 flex-grow">
-      <CreateOrder />
+      <CreateOrder onNameChange={handleNameChange} />
       <div className="md:col-span-2 h-[calc(100vh_-_130px)]">
         <OrderSummary orders={orders} />
         <OrderReport
