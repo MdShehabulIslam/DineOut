@@ -1,17 +1,26 @@
+import { useState } from "react";
 import SearchButton from "./SVG/SearchButton";
 
-export default function OrderReport() {
+export default function OrderReport({ orders, onSearch, onDelete, onDeliver }) {
+  const [option, setOption] = useState("");
+
   return (
     <div>
       <div className="flex justify-between">
         <h2 className="text-xl font-bold mb-4">Order Reports</h2>
-
         <div className="flex gap-4 items-center">
           <SearchButton />
-          <select className=" bg-zinc-900 accent-orange-600 border-none outline-none rounded-sm">
-            <option>All</option>
-            <option>Pending</option>
-            <option>Delivered</option>
+          <select
+            className=" bg-zinc-900 accent-orange-600 border-none outline-none rounded-sm"
+            value={option}
+            onChange={(e) => {
+              setOption(e.target.value);
+              onSearch(e.target.value);
+            }}
+          >
+            <option value="All">All</option>
+            <option value="Pending">Pending</option>
+            <option value="Delivered">Delivered</option>
           </select>
         </div>
       </div>
@@ -29,146 +38,39 @@ export default function OrderReport() {
               </tr>
             </thead>
             <tbody className="text-sm">
-              <tr className="border-t border-gray-700">
-                <td className="py-3">21</td>
-                <td className="py-3">Sumit Saha</td>
-                <td className="py-3">5</td>
-                <td className="py-3">123123</td>
-                <td className="py-3">
-                  <span className="text-red-500">PENDING</span>
-                </td>
-                <td className="py-3">
-                  <button className="bg-gray-800 hover:bg-red-600 text-xs px-3 py-1 rounded-full mr-1 transition-colors duration-300">
-                    Delete
-                  </button>
-                  <button className="bg-gray-800 hover:bg-green-600 text-xs px-3 py-1 rounded-full transition-colors duration-300">
-                    DELIVER
-                  </button>
-                </td>
-              </tr>
-
-              <tr className="border-t border-gray-700">
-                <td className="py-3">21</td>
-                <td className="py-3">Akash Ahmed</td>
-                <td className="py-3">5</td>
-                <td className="py-3">123123</td>
-                <td className="py-3">
-                  <span className="text-green-500">DELIVERED</span>
-                </td>
-                <td className="py-3">
-                  <button className="bg-gray-800 hover:bg-red-600 text-xs px-3 py-1 rounded-full mr-1 transition-colors duration-300">
-                    Delete
-                  </button>
-                </td>
-              </tr>
-
-              <tr className="border-t border-gray-700">
-                <td className="py-3">21</td>
-                <td className="py-3">Saad Hasan</td>
-                <td className="py-3">5</td>
-                <td className="py-3">123123</td>
-                <td className="py-3">
-                  <span className="text-red-500">PENDING</span>
-                </td>
-                <td className="py-3">
-                  <button className="bg-gray-800 hover:bg-red-600 text-xs px-3 py-1 rounded-full mr-1 transition-colors duration-300">
-                    Delete
-                  </button>
-                  <button className="bg-gray-800 hover:bg-green-600 text-xs px-3 py-1 rounded-full transition-colors duration-300">
-                    DELIVER
-                  </button>
-                </td>
-              </tr>
-
-              <tr className="border-t border-gray-700">
-                <td className="py-3">21</td>
-                <td className="py-3">MD Salahuddin</td>
-                <td className="py-3">5</td>
-                <td className="py-3">123123</td>
-                <td className="py-3">
-                  <span className="text-red-500">PENDING</span>
-                </td>
-                <td className="py-3">
-                  <button className="bg-gray-800 hover:bg-red-600 text-xs px-3 py-1 rounded-full mr-1 transition-colors duration-300">
-                    Delete
-                  </button>
-                  <button className="bg-gray-800 hover:bg-green-600 text-xs px-3 py-1 rounded-full transition-colors duration-300">
-                    DELIVER
-                  </button>
-                </td>
-              </tr>
-
-              <tr className="border-t border-gray-700">
-                <td className="py-3">21</td>
-                <td className="py-3">Ferdous</td>
-                <td className="py-3">5</td>
-                <td className="py-3">123123</td>
-                <td className="py-3">
-                  <span className="text-red-500">PENDING</span>
-                </td>
-                <td className="py-3">
-                  <button className="bg-gray-800 hover:bg-red-600 text-xs px-3 py-1 rounded-full mr-1 transition-colors duration-300">
-                    Delete
-                  </button>
-                  <button className="bg-gray-800 hover:bg-green-600 text-xs px-3 py-1 rounded-full transition-colors duration-300">
-                    DELIVER
-                  </button>
-                </td>
-              </tr>
-
-              <tr className="border-t border-gray-700">
-                <td className="py-3">21</td>
-                <td className="py-3">Rafe</td>
-                <td className="py-3">5</td>
-                <td className="py-3">123123</td>
-                <td className="py-3">
-                  <span className="text-red-500">PENDING</span>
-                </td>
-                <td className="py-3">
-                  <button className="bg-gray-800 hover:bg-red-600 text-xs px-3 py-1 rounded-full mr-1 transition-colors duration-300">
-                    Delete
-                  </button>
-                  <button className="bg-gray-800 hover:bg-green-600 text-xs px-3 py-1 rounded-full transition-colors duration-300">
-                    DELIVER
-                  </button>
-                </td>
-              </tr>
-
-              <tr className="border-t border-gray-700">
-                <td className="py-3">21</td>
-                <td className="py-3">Sarwar</td>
-                <td className="py-3">5</td>
-                <td className="py-3">123123</td>
-                <td className="py-3">
-                  <span className="text-red-500">PENDING</span>
-                </td>
-                <td className="py-3">
-                  <button className="bg-gray-800 hover:bg-red-600 text-xs px-3 py-1 rounded-full mr-1 transition-colors duration-300">
-                    Delete
-                  </button>
-                  <button className="bg-gray-800 hover:bg-green-600 text-xs px-3 py-1 rounded-full transition-colors duration-300">
-                    DELIVER
-                  </button>
-                </td>
-              </tr>
-
-              <tr className="border-t border-gray-700">
-                <td className="py-3">21</td>
-                <td className="py-3">Obaidul</td>
-                <td className="py-3">5</td>
-                <td className="py-3">123123</td>
-                <td className="py-3">
-                  <span className="text-red-500">PENDING</span>
-                </td>
-                <td className="py-3">
-                  <button className="bg-gray-800 hover:bg-red-600 text-xs px-3 py-1 rounded-full mr-1 transition-colors duration-300">
-                    Delete
-                  </button>
-                  <button className="bg-gray-800 hover:bg-green-600 text-xs px-3 py-1 rounded-full transition-colors duration-300">
-                    DELIVER
-                  </button>
-                </td>
-              </tr>
+              {orders.map((order) => (
+                <tr className="border-t border-gray-700" key={order.id}>
+                  <td className="py-3">{order.id}</td>
+                  <td className="py-3">{order.name}</td>
+                  <td className="py-3">{order.itemCount}</td>
+                  <td className="py-3">{order.amount}</td>
+                  <td className="py-3">
+                    <span
+                      className={
+                        order.status ? "text-green-500" : "text-red-500"
+                      }
+                    >
+                      {order.status ? "DELIVERED" : "PENDING"}
+                    </span>
+                  </td>
+                  <td className="py-3">
+                    <button
+                      className="bg-gray-800 hover:bg-red-600 text-xs px-3 py-1 rounded-full mr-1 transition-colors duration-300"
+                      onClick={() => onDelete(order.id)}
+                    >
+                      Delete
+                    </button>
+                    {!order.status && (
+                      <button
+                        className="bg-gray-800 hover:bg-green-600 text-xs px-3 py-1 rounded-full transition-colors duration-300"
+                        onClick={() => onDeliver(order.id)}
+                      >
+                        DELIVER
+                      </button>
+                    )}
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
