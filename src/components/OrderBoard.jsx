@@ -1,11 +1,10 @@
 import { useState } from "react";
 import CreateOrder from "./CreateOrder";
+import NoOrderFound from "./NoOrderFound";
 import OrderReport from "./OrderReport";
 import OrderSummary from "./OrderSummary";
 
 export default function OrderBoard() {
-  const [nextId, setNextId] = useState(2);
-
   const defaultOrder = [
     {
       id: 1,
@@ -52,54 +51,69 @@ export default function OrderBoard() {
   ];
 
   const [orders, setOrders] = useState(defaultOrder);
-  const [filteredOrders, setFilteredOrders] = useState(defaultOrder);
-
-  //   setNextId((prevId) => prevId + 1);
+  const [filterOption, setFilterOption] = useState("All");
+  const [pendingFilterIds, setPendingFilterIds] = useState(null);
 
   function handleSearch(option) {
-    if (option === "All") {
-      setFilteredOrders(orders);
-    } else if (option === "Pending") {
-      setFilteredOrders(orders.filter((order) => order.status === false));
-    } else if (option === "Delivered") {
-      setFilteredOrders(orders.filter((order) => order.status === true));
+    setFilterOption(option);
+    if (option === "Pending") {
+      const pendingIds = orders
+        .filter((order) => !order.status)
+        .map((o) => o.id);
+      setPendingFilterIds(pendingIds);
+    } else {
+      setPendingFilterIds(null);
     }
   }
 
+  const filteredOrders = (() => {
+    if (filterOption === "All") {
+      return orders;
+    }
+    if (filterOption === "Pending") {
+      if (pendingFilterIds) {
+        return orders.filter((order) => pendingFilterIds.includes(order.id));
+      }
+
+      return orders.filter((order) => !order.status);
+    }
+    if (filterOption === "Delivered") {
+      return orders.filter((order) => order.status);
+    }
+    return orders;
+  })();
+
   function handleDelete(orderId) {
-    const ordersAfterDelete = orders.filter((order) => order.id !== orderId);
-    setOrders(ordersAfterDelete);
-    setFilteredOrders(ordersAfterDelete);
+    setOrders(orders.filter((order) => order.id !== orderId));
   }
 
   function handleDeliver(orderId) {
-    const ordersAfterDeliver = orders.map((order) => {
-      if (order.id === orderId) {
-        return {
-          ...order,
-          status: !order.status,
-        };
-      }
-      return order;
-    });
-
-    setOrders(ordersAfterDeliver);
-    setFilteredOrders(ordersAfterDeliver);
+    setOrders(
+      orders.map((order) =>
+        order.id === orderId ? { ...order, status: true } : order
+      )
+    );
   }
 
-  function handleNameChange(inputName) {}
+  function handleNewOrder(order) {
+    setOrders([...orders, order]);
+  }
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6 flex-grow">
-      <CreateOrder onNameChange={handleNameChange} />
+      <CreateOrder onSubmit={handleNewOrder} />
       <div className="md:col-span-2 h-[calc(100vh_-_130px)]">
         <OrderSummary orders={orders} />
-        <OrderReport
-          orders={filteredOrders}
-          onSearch={handleSearch}
-          onDelete={handleDelete}
-          onDeliver={handleDeliver}
-        />
+        {orders.length > 0 ? (
+          <OrderReport
+            orders={filteredOrders}
+            onSearch={handleSearch}
+            onDelete={handleDelete}
+            onDeliver={handleDeliver}
+          />
+        ) : (
+          <NoOrderFound />
+        )}
       </div>
     </div>
   );

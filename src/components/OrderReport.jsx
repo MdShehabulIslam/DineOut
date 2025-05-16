@@ -2,11 +2,7 @@ import { useState } from "react";
 import SearchButton from "./SVG/SearchButton";
 
 export default function OrderReport({ orders, onSearch, onDelete, onDeliver }) {
-  const [option, setOption] = useState("");
-
-  function handleClick() {
-    onSearch(option);
-  }
+  const [option, setOption] = useState("All");
 
   return (
     <div>
@@ -19,9 +15,8 @@ export default function OrderReport({ orders, onSearch, onDelete, onDeliver }) {
             value={option}
             onChange={(e) => {
               setOption(e.target.value);
-              // onSearch(e.target.value);
+              onSearch(e.target.value);
             }}
-            onClick={handleClick}
           >
             <option value="All">All</option>
             <option value="Pending">Pending</option>
