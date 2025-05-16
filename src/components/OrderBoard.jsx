@@ -52,36 +52,21 @@ export default function OrderBoard() {
 
   const [orders, setOrders] = useState(defaultOrder);
   const [filterOption, setFilterOption] = useState("All");
-  const [pendingFilterIds, setPendingFilterIds] = useState(null);
 
   function handleSearch(option) {
     setFilterOption(option);
-    if (option === "Pending") {
-      const pendingIds = orders
-        .filter((order) => !order.status)
-        .map((o) => o.id);
-      setPendingFilterIds(pendingIds);
-    } else {
-      setPendingFilterIds(null);
-    }
   }
 
-  const filteredOrders = (() => {
-    if (filterOption === "All") {
-      return orders;
-    }
-    if (filterOption === "Pending") {
-      if (pendingFilterIds) {
-        return orders.filter((order) => pendingFilterIds.includes(order.id));
-      }
-
+  function getFilteredOrders() {
+    if (filterOption === "All") return orders;
+    if (filterOption === "Pending")
       return orders.filter((order) => !order.status);
-    }
-    if (filterOption === "Delivered") {
+    if (filterOption === "Delivered")
       return orders.filter((order) => order.status);
-    }
     return orders;
-  })();
+  }
+
+  const filteredOrders = getFilteredOrders();
 
   function handleDelete(orderId) {
     setOrders(orders.filter((order) => order.id !== orderId));
