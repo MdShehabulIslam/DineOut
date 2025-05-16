@@ -94,7 +94,7 @@ export default function OrderBoard() {
         itemCount: order.items.length,
         amount: order.items.reduce((sum, item) => sum + item.price, 0),
       };
-      setOrders([...orders, newOrder]);
+      setOrders([newOrder, ...orders]);
       setNextId(nextId + 1);
     }
   }
