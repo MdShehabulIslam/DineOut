@@ -7,28 +7,28 @@ import OrderSummary from "./OrderSummary";
 export default function OrderBoard() {
   const defaultOrder = [
     {
-      id: 1,
+      id: 31,
       name: "Siam Islam",
       itemCount: 4,
       amount: 2900,
       status: false,
     },
     {
-      id: 2,
+      id: 24,
       name: "Sumit Saha",
       itemCount: 3,
       amount: 2300,
       status: true,
     },
     {
-      id: 3,
+      id: 53,
       name: "Ishika",
       itemCount: 3,
       amount: 2300,
       status: true,
     },
     {
-      id: 4,
+      id: 42,
       name: "Shohana",
       itemCount: 2,
       amount: 2300,
@@ -52,6 +52,11 @@ export default function OrderBoard() {
 
   const [orders, setOrders] = useState(defaultOrder);
   const [filterOption, setFilterOption] = useState("All");
+  const [nextId, setNextId] = useState(
+    defaultOrder.length > 0
+      ? Math.max(...defaultOrder.map((item) => item.id)) + 1
+      : 1
+  );
 
   function handleSearch(option) {
     setFilterOption(option);
@@ -81,7 +86,17 @@ export default function OrderBoard() {
   }
 
   function handleNewOrder(order) {
-    setOrders([...orders, order]);
+    if (order) {
+      const newOrder = {
+        ...order,
+        id: nextId,
+        status: false,
+        itemCount: order.items.length,
+        amount: order.items.reduce((sum, item) => sum + item.price, 0),
+      };
+      setOrders([...orders, newOrder]);
+      setNextId(nextId + 1);
+    }
   }
 
   return (

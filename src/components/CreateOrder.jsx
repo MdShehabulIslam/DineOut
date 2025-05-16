@@ -3,6 +3,7 @@ import AddButton from "./SVG/AddButton";
 import ChickenNugget from "./SVG/ChickenNugget";
 import Hamburger from "./SVG/Hamburger";
 import Pizza from "./SVG/Pizza";
+import RemoveButton from "./SVG/RemoveButton";
 import Sandwich from "./SVG/Sandwich";
 
 export default function CreateOrder({ onSubmit }) {
@@ -24,13 +25,22 @@ export default function CreateOrder({ onSubmit }) {
   function handleSubmit() {
     if (!inputName || order.length === 0) return;
 
-    onSubmit({
+    const newOrder = {
       name: inputName,
-      items: order,
-    });
+      items: order.map((item) => ({
+        id: item.id,
+        name: item.name,
+        price: parsePrice(item.price),
+      })),
+    };
 
+    onSubmit(newOrder);
     setInputName("");
     setOrder([]);
+  }
+
+  function parsePrice(priceString) {
+    return Number(priceString.replace(/[^\d]/g, ""));
   }
 
   function handleToggleButton(itemId) {
@@ -38,9 +48,15 @@ export default function CreateOrder({ onSubmit }) {
     if (exists) {
       setOrder(order.filter((item) => item.id !== itemId)); // remove item
     } else {
-      setOrder([...order, item]); // add item
+      const newItem = menuItem.find((item) => item.id === itemId);
+      setOrder([...order, newItem]); // add item
     }
   }
+
+  const totalPrice = order.reduce(
+    (sum, item) => sum + parsePrice(item.price),
+    0
+  );
 
   return (
     <div className="bg-cardbg rounded-lg p-6 h-[calc(100vh_-_130px)]">
@@ -98,7 +114,7 @@ export default function CreateOrder({ onSubmit }) {
         disabled={!inputName || order.length === 0}
         onClick={handleSubmit}
       >
-        Place Order (BDT {order.reduce((sum, item) => sum + item.price, 0)})
+        Place Order (BDT {totalPrice})
       </button>
     </div>
   );
